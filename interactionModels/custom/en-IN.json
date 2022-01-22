@@ -1,0 +1,149 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "smart cube",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.FallbackIntent",
+          "samples": []
+        },
+        {
+          "name": "PowerOnOffIntent",
+          "slots": [
+            {
+              "name": "power",
+              "type": "power"
+            }
+          ],
+          "samples": [
+            "switch the a. c. {power}",
+            "turn the a. c. {power}",
+            "turn {power} the a. c.",
+            "switch {power} the a. c.",
+            "switch a. c. {power}",
+            "turn a. c. {power}",
+            "turn {power} a. c.",
+            "switch {power} a. c."
+          ]
+        },
+        {
+          "name": "TemperatureChangeIntent",
+          "slots": [
+            {
+              "name": "temperature",
+              "type": "AMAZON.NUMBER",
+              "samples": [
+                "{temperature}",
+                "{temperature} degrees"
+              ]
+            }
+          ],
+          "samples": [
+            "set AC temperature to {temperature} degrees",
+            "set AC temperature to {temperature}",
+            "set AC to {temperature} degrees",
+            "set AC temperature {temperature} degrees",
+            "set AC temperature {temperature}"
+          ]
+        }
+      ],
+      "types": [
+        {
+          "values": [
+            {
+              "name": {
+                "value": "off"
+              }
+            },
+            {
+              "name": {
+                "value": "on"
+              }
+            }
+          ],
+          "name": "power"
+        }
+      ]
+    },
+    "dialog": {
+      "intents": [
+        {
+          "name": "TemperatureChangeIntent",
+          "confirmationRequired": false,
+          "prompts": {},
+          "slots": [
+            {
+              "name": "temperature",
+              "type": "AMAZON.NUMBER",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.983057344484.1262002498776"
+              },
+              "validations": [
+                {
+                  "type": "isGreaterThanOrEqualTo",
+                  "prompt": "Slot.Validation.983057344484.1262002498776.302875002844",
+                  "value": "16"
+                },
+                {
+                  "type": "isLessThanOrEqualTo",
+                  "prompt": "Slot.Validation.983057344484.1262002498776.244176152677",
+                  "value": "31"
+                }
+              ]
+            }
+          ],
+          "delegationStrategy": "ALWAYS"
+        }
+      ],
+      "delegationStrategy": "ALWAYS"
+    },
+    "prompts": [
+      {
+        "id": "Elicit.Slot.983057344484.1262002498776",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "What temperature do you want to set the AC to?"
+          }
+        ]
+      },
+      {
+        "id": "Slot.Validation.983057344484.1262002498776.302875002844",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "Sorry, {temperature} degrees is not a valid setting."
+          }
+        ]
+      },
+      {
+        "id": "Slot.Validation.983057344484.1262002498776.244176152677",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "Sorry, {temperature} degrees is not a valid setting."
+          }
+        ]
+      }
+    ]
+  },
+  "version": "6"
+}
