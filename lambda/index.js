@@ -10,21 +10,17 @@ require('firebase/database');
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyBEcYg9PzkTjkYcMo_NMtKsEpdZqy6cb1s",
-  authDomain: "wellnesshome-19826.firebaseapp.com",
-  databaseURL: "https://wellnesshome-19826-default-rtdb.firebaseio.com",
-  projectId: "wellnesshome-19826",
-  storageBucket: "wellnesshome-19826.appspot.com",
-  messagingSenderId: "198460061416",
-  appId: "1:198460061416:web:6a2392d5841d5c65a67b5d",
-  measurementId: "G-QV9KGZ8Q2Y"
-};
-
+    apiKey: "AIzaSyBEcYg9PzkTjkYcMo_NMtKsEpdZqy6cb1s",
+    authDomain: "wellnesshome-19826.firebaseapp.com",
+    databaseURL: "https://wellnesshome-19826-default-rtdb.firebaseio.com",
+    projectId: "wellnesshome-19826",
+    storageBucket: "wellnesshome-19826.appspot.com",
+    messagingSenderId: "198460061416",
+    appId: "1:198460061416:web:6a2392d5841d5c65a67b5d",
+    measurementId: "G-QV9KGZ8Q2Y"
+  };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-
-// Get a reference to the database service
-var database = firebase.database();
 
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
@@ -50,7 +46,7 @@ const PowerOnOffIntentHandler = {
         let speakOutput = '';
         try{
             firebase.database().goOnline();
-            await database.ref('/ACState').set({
+            await firebase.database().ref('/ACState').set({
                 AlexaChangedState : true,
                 Power : (powerState.value === 'on'),
                 ACMode: 'Cool',
@@ -88,7 +84,7 @@ const TemperatureChangeIntentHandler = {
         let speakOutput = '';
         try{
             firebase.database().goOnline();
-            await database.ref('/ACState').set({
+            await firebase.database().ref('/ACState').set({
                 AlexaChangedState : true,
                 Power : true,
                 ACMode: 'Cool',
