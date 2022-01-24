@@ -46,13 +46,12 @@ const PowerOnOffIntentHandler = {
         let speakOutput = '';
         try{
             firebase.database().goOnline();
-            const resp = await firebase.database().ref('/ACState').update({
+            await firebase.database().ref('/ACState').update({
                 AlexaChangedState : true,
-                Power : (powerState.value === 'on'),
+                Power : (powerState === 'on'),
                 ACMode: 'Cool',
                 FanSpeed : 'Auto'
-            }) || {};
-            console.log(resp);
+            })
             firebase.database().goOffline();
             
             if(powerState) {
@@ -84,22 +83,17 @@ const TemperatureChangeIntentHandler = {
         let speakOutput = '';
         try{
             firebase.database().goOnline();
-            const resp = await firebase.database().ref('/ACState').update({
+            await firebase.database().ref('/ACState').update({
                 AlexaChangedState : true,
                 Power : true,
                 ACMode: 'Cool',
-                Temperature : parseInt(temperature.value),
+                Temperature : parseInt(temperature),
                 FanSpeed : 'Auto'
-            }) || {};
-            console.log(resp);
+            })
             firebase.database().goOffline();
             
-            if(temperature) {
-                let resolution = handlerInput.requestEnvelope.request.intent.slots.power.resolutions.resolutionsPerAuthority[0];
-                if (resolution.status.code === "ER_SUCCESS_MATCH") {
-                    speakOutput = `Alright, setting the air conditioner to ${temperature} degrees`;
-                }
-            }
+            if(temperature) 
+               speakOutput = `Alright, setting the air conditioner to ${temperature} degrees`;
             
         }catch(e){
             console.log("Catch logs here: ",e);

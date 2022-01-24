@@ -59,7 +59,9 @@
             "set AC temperature to {temperature}",
             "set AC to {temperature} degrees",
             "set AC temperature {temperature} degrees",
-            "set AC temperature {temperature}"
+            "set AC temperature {temperature}",
+            "change a.c. temperature to {temperature} degrees",
+            "change a.c. temperature to {temperature}"
           ]
         }
       ],
@@ -145,5 +147,5 @@
       }
     ]
   },
-  "version": "6"
+  "version": "7"
 }
