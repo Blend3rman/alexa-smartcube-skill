@@ -9,11 +9,15 @@
         },
         {
           "name": "AMAZON.HelpIntent",
-          "samples": []
+          "samples": [
+            "how to use"
+          ]
         },
         {
           "name": "AMAZON.StopIntent",
-          "samples": []
+          "samples": [
+            "stop operating AC"
+          ]
         },
         {
           "name": "AMAZON.NavigateHomeIntent",
@@ -35,14 +39,14 @@
             }
           ],
           "samples": [
-            "switch the a. c. {power}",
-            "turn the a. c. {power}",
-            "turn {power} the a. c.",
-            "switch {power} the a. c.",
-            "switch a. c. {power}",
-            "turn a. c. {power}",
-            "turn {power} a. c.",
-            "switch {power} a. c."
+            "switch the AC {power}",
+            "turn the AC {power}",
+            "turn {power} the AC",
+            "switch {power} the AC",
+            "switch AC {power}",
+            "turn AC {power}",
+            "turn {power} AC",
+            "switch {power} AC"
           ]
         },
         {
@@ -58,13 +62,17 @@
             }
           ],
           "samples": [
+            "set temperature to {temperature}",
+            "set temperature to {temperature} degrees",
             "set AC temperature to {temperature} degrees",
             "set AC temperature to {temperature}",
             "set AC to {temperature} degrees",
             "set AC temperature {temperature} degrees",
             "set AC temperature {temperature}",
-            "change a.c. temperature to {temperature} degrees",
-            "change a.c. temperature to {temperature}"
+            "change temperature to {temperature} degrees",
+            "change temperature to {temperature}",
+            "change AC temperature to {temperature} degrees",
+            "change AC temperature to {temperature}"
           ]
         },
         {
@@ -79,8 +87,10 @@
             }
           ],
           "samples": [
-            "set a.c. mode to {acmode}",
-            "change a.c. mode to {acmode}"
+            "change AC mode {acmode}",
+            "set AC mode {acmode}",
+            "set AC mode to {acmode}",
+            "change AC mode to {acmode}"
           ]
         },
         {
@@ -95,10 +105,14 @@
             }
           ],
           "samples": [
+            "change fan speed {fanspeed}",
+            "set fan speed {fanspeed}",
             "change fan speed to {fanspeed}",
             "set fan speed to {fanspeed}",
-            "change a.c. fan speed to {fanspeed}",
-            "set a.c. fan speed to {fanspeed}"
+            "change AC fan speed {fanspeed}",
+            "set AC fan speed {fanspeed}",
+            "change AC fan speed to {fanspeed}",
+            "set AC fan speed to {fanspeed}"
           ]
         }
       ],
@@ -267,7 +281,8 @@
                 "elicitation": "Elicit.Slot.1278654944761.847445476455"
               }
             }
-          ]
+          ],
+          "delegationStrategy": "SKILL_RESPONSE"
         }
       ],
       "delegationStrategy": "ALWAYS"
@@ -329,5 +344,5 @@
       }
     ]
   },
-  "version": "8"
+  "version": "20"
 }

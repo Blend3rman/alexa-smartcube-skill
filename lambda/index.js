@@ -112,7 +112,7 @@ const ACModeChangeIntentHandler = {
     },
     async handle(handlerInput) {
         const acModeVal = Alexa.getSlotValue(handlerInput.requestEnvelope, 'acmode');
-        let speakOutput = '';
+        let speakOutput = `Trying to set the air conditioner to ${acModeVal} mode...`;
         try{
             firebase.database().goOnline();
             await firebase.database().ref('/ACState').update({
@@ -148,7 +148,7 @@ const FanSpeedChangeIntentHandler = {
     },
     async handle(handlerInput) {
         const fanSpeedVal = Alexa.getSlotValue(handlerInput.requestEnvelope, 'fanspeed');
-        let speakOutput = '';
+        let speakOutput = `Trying to set the air conditioner fan speed to ${fanSpeedVal}...`;
         try{
             firebase.database().goOnline();
             await firebase.database().ref('/ACState').update({
@@ -199,7 +199,7 @@ const CancelAndStopIntentHandler = {
                 || Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.StopIntent');
     },
     handle(handlerInput) {
-        const speakOutput = 'Goodbye!';
+        const speakOutput = 'Thanks for using Smart Cube!';
 
         return handlerInput.responseBuilder
             .speak(speakOutput)

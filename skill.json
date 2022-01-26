@@ -5,9 +5,9 @@
         "en-IN": {
           "summary": "Alexa Skill to Control SmartCube Devices",
           "examplePhrases": [
-            "smart cube turn on a.c.",
-            "smart cube set a.c. temperature to 20 degrees",
-            "help"
+            "Alexa, start smart cube",
+            "Alexa, ask smart cube how to use",
+            "Alexa, ask smart cube stop operating AC"
           ],
           "keywords": [
             "smart",
