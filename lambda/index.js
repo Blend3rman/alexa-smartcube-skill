@@ -86,9 +86,7 @@ const TemperatureChangeIntentHandler = {
             await firebase.database().ref('/ACState').update({
                 AlexaChangedState : true,
                 Power : true,
-                ACMode: 'Cool',
-                Temperature : parseInt(temperature),
-                FanSpeed : 'Auto'
+                Temperature : parseInt(temperature)
             })
             firebase.database().goOffline();
             
@@ -106,6 +104,79 @@ const TemperatureChangeIntentHandler = {
             .getResponse();
     }
 };
+
+const ACModeChangeIntentHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'ACModeChangeIntent';
+    },
+    async handle(handlerInput) {
+        const acModeVal = Alexa.getSlotValue(handlerInput.requestEnvelope, 'acmode');
+        let speakOutput = '';
+        try{
+            firebase.database().goOnline();
+            await firebase.database().ref('/ACState').update({
+                AlexaChangedState : true,
+                Power : true,
+                ACMode: acModeVal
+            })
+            firebase.database().goOffline();
+            
+            if(acModeVal) {
+                let resolution = handlerInput.requestEnvelope.request.intent.slots.acmode.resolutions.resolutionsPerAuthority[0];
+                if (resolution.status.code === "ER_SUCCESS_MATCH") {
+                    speakOutput = `Alright, setting the air conditioner to ${acModeVal} mode`;
+                }
+            }
+            
+        }catch(e){
+            console.log("Catch logs here: ",e);
+            speakOutput = `There was a problem setting the air conditioner to ${acModeVal}`
+        }
+        console.log("Out of Try Catch");
+        return handlerInput.responseBuilder
+            .speak(speakOutput)
+            .reprompt(speakOutput)
+            .getResponse();
+    }
+};
+
+const FanSpeedChangeIntentHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'FanSpeedChangeIntent';
+    },
+    async handle(handlerInput) {
+        const fanSpeedVal = Alexa.getSlotValue(handlerInput.requestEnvelope, 'fanspeed');
+        let speakOutput = '';
+        try{
+            firebase.database().goOnline();
+            await firebase.database().ref('/ACState').update({
+                AlexaChangedState : true,
+                Power : true,
+                FanSpeed : fanSpeedVal
+            })
+            firebase.database().goOffline();
+            
+            if(fanSpeedVal) {
+                let resolution = handlerInput.requestEnvelope.request.intent.slots.fanspeed.resolutions.resolutionsPerAuthority[0];
+                if (resolution.status.code === "ER_SUCCESS_MATCH") {
+                    speakOutput = `Alright, setting the air conditioner fan speed to ${fanSpeedVal}`;
+                }
+            }
+            
+        }catch(e){
+            console.log("Catch logs here: ",e);
+            speakOutput = `There was a problem setting the air conditioner fan speed to ${fanSpeedVal}`
+        }
+        console.log("Out of Try Catch");
+        return handlerInput.responseBuilder
+            .speak(speakOutput)
+            .reprompt(speakOutput)
+            .getResponse();
+    }
+};
+
 const HelpIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
@@ -218,6 +289,8 @@ exports.handler = Alexa.SkillBuilders.custom()
         LaunchRequestHandler,
         PowerOnOffIntentHandler,
         TemperatureChangeIntentHandler,
+        ACModeChangeIntentHandler,
+        FanSpeedChangeIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
         FallbackIntentHandler,

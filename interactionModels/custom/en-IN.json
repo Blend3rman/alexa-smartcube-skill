@@ -28,7 +28,10 @@
           "slots": [
             {
               "name": "power",
-              "type": "power"
+              "type": "power",
+              "samples": [
+                "{power}"
+              ]
             }
           ],
           "samples": [
@@ -63,6 +66,40 @@
             "change a.c. temperature to {temperature} degrees",
             "change a.c. temperature to {temperature}"
           ]
+        },
+        {
+          "name": "ACModeChangeIntent",
+          "slots": [
+            {
+              "name": "acmode",
+              "type": "acmode",
+              "samples": [
+                "{acmode}"
+              ]
+            }
+          ],
+          "samples": [
+            "set a.c. mode to {acmode}",
+            "change a.c. mode to {acmode}"
+          ]
+        },
+        {
+          "name": "FanSpeedChangeIntent",
+          "slots": [
+            {
+              "name": "fanspeed",
+              "type": "fanspeed",
+              "samples": [
+                "{fanspeed}"
+              ]
+            }
+          ],
+          "samples": [
+            "change fan speed to {fanspeed}",
+            "set fan speed to {fanspeed}",
+            "change a.c. fan speed to {fanspeed}",
+            "set a.c. fan speed to {fanspeed}"
+          ]
         }
       ],
       "types": [
@@ -80,6 +117,76 @@
             }
           ],
           "name": "power"
+        },
+        {
+          "values": [
+            {
+              "name": {
+                "value": "dry"
+              }
+            },
+            {
+              "name": {
+                "value": "fan"
+              }
+            },
+            {
+              "name": {
+                "value": "cool",
+                "synonyms": [
+                  "cooling"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "auto",
+                "synonyms": [
+                  "automatic"
+                ]
+              }
+            }
+          ],
+          "name": "acmode"
+        },
+        {
+          "values": [
+            {
+              "name": {
+                "value": "high",
+                "synonyms": [
+                  "max",
+                  "maximum"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "medium",
+                "synonyms": [
+                  "normal"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "low",
+                "synonyms": [
+                  "min",
+                  "minimum"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "auto",
+                "synonyms": [
+                  "automatic"
+                ]
+              }
+            }
+          ],
+          "name": "fanspeed"
         }
       ]
     },
@@ -113,6 +220,54 @@
             }
           ],
           "delegationStrategy": "ALWAYS"
+        },
+        {
+          "name": "ACModeChangeIntent",
+          "confirmationRequired": false,
+          "prompts": {},
+          "slots": [
+            {
+              "name": "acmode",
+              "type": "acmode",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.212034013735.197412283789"
+              }
+            }
+          ]
+        },
+        {
+          "name": "FanSpeedChangeIntent",
+          "confirmationRequired": false,
+          "prompts": {},
+          "slots": [
+            {
+              "name": "fanspeed",
+              "type": "fanspeed",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.1087519320352.514185017749"
+              }
+            }
+          ]
+        },
+        {
+          "name": "PowerOnOffIntent",
+          "confirmationRequired": false,
+          "prompts": {},
+          "slots": [
+            {
+              "name": "power",
+              "type": "power",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.1278654944761.847445476455"
+              }
+            }
+          ]
         }
       ],
       "delegationStrategy": "ALWAYS"
@@ -144,8 +299,35 @@
             "value": "Sorry, {temperature} degrees is not a valid setting."
           }
         ]
+      },
+      {
+        "id": "Elicit.Slot.212034013735.197412283789",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "What mode do you want to set the airconditioner to?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.1087519320352.514185017749",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "What fan speed do you want to set the airconditioner to?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.1278654944761.847445476455",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "Do you want to turn the airconditioner on or off?"
+          }
+        ]
       }
     ]
   },
-  "version": "7"
+  "version": "8"
 }
